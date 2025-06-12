@@ -12,7 +12,7 @@ app.use(cors());
 //GET ROUTE FOR ALL TO DO'S
 app.get("/", async (req, res) => {
   try {
-    const fullList = await db.query("SELECT * FROM todo ORDER BY id ASC");
+    const fullList = await db.query("SELECT * FROM public.todo ORDER BY id ASC");
     res.json(fullList.rows);
   } catch (error) {
     console.log(error);
