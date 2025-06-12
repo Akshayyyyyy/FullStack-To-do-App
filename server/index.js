@@ -80,9 +80,9 @@ app.delete("/todo/:id", async (req, res) => {
 });
 
 // ✅ FIXED: Catch-all route for SPA
-app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(clientPath, "index.html"));
-});
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.resolve(clientPath, "index.html"));
+// });
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}.`);
