@@ -3,6 +3,9 @@ import db from "./db.js";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -66,6 +69,10 @@ app.post("/todo", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(clientPath, "index.html"));
 });
 
 app.listen(port, () => {
