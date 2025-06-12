@@ -7,7 +7,7 @@ function Input() {
   async function onSubmit(e) {
     try {
       const body = { description };
-      const response = await axios.post("https://fullstack-to-do-app-x6e7.onrender.com/", body);
+      const response = await axios.post("http://localhost:3000/todo", body);
       console.log(response.data);
       setDescription("");
     } catch (error) {

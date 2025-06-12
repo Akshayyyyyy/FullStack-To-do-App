@@ -10,7 +10,7 @@ function Edit({ editTodo, refreshTodos }) {
 
   async function updateTask() {
     try {
-      await axios.put(`https://fullstack-to-do-app-x6e7.onrender.com/${editTodo.id}`, {
+      await axios.put(`http://localhost:3000/todo/${editTodo.id}`, {
         description: description,
       });
       await refreshTodos();

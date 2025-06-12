@@ -7,8 +7,7 @@ function List() {
 
   async function todoData() {
     try {
-      const response = await axios.get("https://fullstack-to-do-app-x6e7.onrender.com/");
-      console.log(response.data);
+      const response = await axios.get("http://localhost:3000/");
       setData(response.data);
     } catch (error) {
       console.log(error);
@@ -17,7 +16,7 @@ function List() {
 
   async function deleteTodo(id) {
     try {
-      await axios.delete(`https://fullstack-to-do-app-x6e7.onrender.com/${id}`);
+      await axios.delete(`http://localhost:3000/todo/${id}`);
       setData(data.filter((todo) => todo.id !== id));
     } catch (error) {
       console.log(error);

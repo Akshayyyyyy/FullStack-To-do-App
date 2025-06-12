@@ -1,23 +1,15 @@
 import express from "express";
 import db from "./db.js";
 import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 db.connect();
 
 app.use(express.json());
 app.use(cors());
 
-// Serve frontend from client/dist
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const clientPath = path.join(__dirname, "../client/dist");
-app.use(express.static(clientPath));
-
-// GET ROUTE FOR ALL TO DO'S
+//GET ROUTE FOR ALL TO DO'S
 app.get("/", async (req, res) => {
   try {
     const fullList = await db.query("SELECT * FROM todo ORDER BY id ASC");
@@ -38,7 +30,7 @@ app.get("/todo/:id", async (req, res) => {
   }
 });
 
-// PUT ROUTE FOR UPDATE TODO ITEMS
+//PUT ROUTE FOR UPDATE TODO ITEMS
 app.put("/todo/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -53,7 +45,7 @@ app.put("/todo/:id", async (req, res) => {
   }
 });
 
-// POST ROUTE
+//POST ROUTE
 app.post("/todo", async (req, res) => {
   try {
     console.log("Incoming request body:", req.body);
@@ -68,22 +60,17 @@ app.post("/todo", async (req, res) => {
   }
 });
 
-// DELETE ROUTE
-app.delete("/todo/:id", async (req, res) => {
+//DELETE ROUTE
+app.delete("/todo/:id/", async (req, res) => {
   try {
     const { id } = req.params;
     const del = await db.query("DELETE FROM todo WHERE id=$1", [id]);
-    res.json({ deleted: del.rowCount });
+    res.json("deleted:", del);
   } catch (error) {
     console.log(error);
   }
 });
 
-// ✅ FIXED: Catch-all route for SPA
-app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(clientPath, "index.html"));
-});
-
 app.listen(port, () => {
-  console.log(`Server is listening on port ${port}.`);
+  console.log(`Server is listing on port ${port}.`);
 });
