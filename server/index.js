@@ -23,7 +23,7 @@ app.get("/", async (req, res) => {
 app.get("/todo/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const singleTodo = await db.query("SELECT * FROM todo WHERE id=$1", [id]);
+    const singleTodo = await db.query("SELECT * FROM public.todo WHERE id=$1", [id]);
     res.json(singleTodo.rows);
   } catch (error) {
     console.log(error);
@@ -36,7 +36,7 @@ app.put("/todo/:id", async (req, res) => {
     const { id } = req.params;
     const { description } = req.body;
     const update = await db.query(
-      "UPDATE todo SET description=$1 WHERE id=$2",
+      "UPDATE public.todo SET description=$1 WHERE id=$2",
       [description, id]
     );
     res.json(update.rows);
@@ -51,7 +51,7 @@ app.post("/todo", async (req, res) => {
     console.log("Incoming request body:", req.body);
     const { description } = req.body;
     const newTodo = await db.query(
-      "INSERT INTO todo (description) VALUES($1) RETURNING *",
+      "INSERT INTO public.todo (description) VALUES($1) RETURNING *",
       [description]
     );
     res.json(newTodo.rows);
@@ -64,7 +64,7 @@ app.post("/todo", async (req, res) => {
 app.delete("/todo/:id/", async (req, res) => {
   try {
     const { id } = req.params;
-    const del = await db.query("DELETE FROM todo WHERE id=$1", [id]);
+    const del = await db.query("DELETE FROM public.todo WHERE id=$1", [id]);
     res.json("deleted:", del);
   } catch (error) {
     console.log(error);
