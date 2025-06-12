@@ -1,6 +1,8 @@
 import express from "express";
 import db from "./db.js";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -8,6 +10,12 @@ db.connect();
 
 app.use(express.json());
 app.use(cors());
+
+// Serve frontend from client/dist
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const clientPath = path.join(__dirname, "../client/dist");
+app.use(express.static(clientPath));
 
 //GET ROUTE FOR ALL TO DO'S
 app.get("/", async (req, res) => {
