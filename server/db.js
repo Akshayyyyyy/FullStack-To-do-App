@@ -19,3 +19,4 @@ const db = process.env.DATABASE_URL
     });
 
 export default db;
+// Connect to the database
