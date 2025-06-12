@@ -71,8 +71,9 @@ app.post("/todo", async (req, res) => {
   }
 });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(clientPath, "index.html"));
+// Fallback route to serve index.html for any unmatched routes
+app.get("/*", function (req, res) {
+  res.sendFile(path.resolve(clientPath, "index.html"));
 });
 
 app.listen(port, () => {
