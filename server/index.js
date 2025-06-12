@@ -71,6 +71,14 @@ app.delete("/todo/:id/", async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
+=======
+// ✅ FIXED: Catch-all route for SPA
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.resolve(clientPath, "index.html"));
+// });
+
+>>>>>>> 7748b779d026d8d75b0b8cd24576632654503504
 app.listen(port, () => {
   console.log(`Server is listing on port ${port}.`);
 });
